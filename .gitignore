@@ -1,0 +1,5 @@
+*.DS_Store
+AMI-diarization-setup/
+data/
+VBx/models/ResNet101_8kHz/nnet/raw_195.pth
+VBx/models/ResNet101_16kHz/nnet/raw_81.pth
