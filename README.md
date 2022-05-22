@@ -23,7 +23,7 @@ git submodule init
 git submodule update
 ```
 ## Predicting
-Run the example
+Predicting for a test wav file:
 ```bash
 ./run.sh $(filename).wav
 ```
