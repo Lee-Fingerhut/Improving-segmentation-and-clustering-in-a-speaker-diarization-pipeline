@@ -10,7 +10,7 @@ conda activate VBx
 ```
 2. Clone the repo:
 ```bash
-git clone https://github.com/Lee-Fingerhut/Speaker-Diarization.git
+git clone https://github.com/Lee-Fingerhut/Improving-segmentation-and-clustering-in-a-speaker-diarization-pipeline.git
 ```
 3. Install the package
 ```bash
