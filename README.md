@@ -1,6 +1,5 @@
 
-# Speaker Diarization
-
+# Improving segmentation and clustering in a speaker diarization pipeline
 
 
 ## Installations Guide
