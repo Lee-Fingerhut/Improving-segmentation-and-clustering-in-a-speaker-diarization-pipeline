@@ -45,8 +45,17 @@ from scipy.spatial.distance import squareform
 from scipy.special import softmax
 from scipy.linalg import eigh
 
-from diarization_lib import read_xvector_timing_dict, l2_norm, cos_similarity, twoGMMcalib_lin, merge_adjacent_labels, DBSCAN_diar, \
-    mkdir_p
+from diarization_lib import (
+    read_xvector_timing_dict,
+    l2_norm,
+    cos_similarity,
+    twoGMMcalib_lin,
+    merge_adjacent_labels,
+    DBSCAN_diar,
+    MeanShift_diar,
+    OPTICS_diar,
+    mkdir_p,
+)
 from kaldi_utils import read_plda
 from VB_diarization import VB_diarization
 
@@ -59,7 +68,7 @@ def write_output(fp, out_labels, starts, ends):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--init', required=True, type=str, choices=['AHC', 'AHC+VB', 'random_5', 'DBSCAN'],
+    parser.add_argument('--init', required=True, type=str, choices=['AHC', 'AHC+VB', 'random_5', 'DBSCAN', 'MeanShift', 'OPTICS'],
                         help='AHC for using only AHC or AHC+VB for VB-HMM after AHC initilization or random_5 '
                              'for running 5 random initializations for VBx and picking the best per-ELBO')
     parser.add_argument('--out-rttm-dir', required=True, type=str, help='Directory to store output rttm files')
@@ -126,6 +135,10 @@ if __name__ == '__main__':
 
         if args.init == 'DBSCAN':
             labels1st = DBSCAN_diar(x)
+        if args.init == 'MeanShift':
+            labels1st = MeanShift_diar(x)
+        if args.init == 'OPTICS':
+            labels1st = OPTICS_diar(x)
         if args.init == 'AHC':
             # Kaldi-like AHC of x-vectors (scr_mx is matrix of pairwise
             # similarities between all x-vectors)

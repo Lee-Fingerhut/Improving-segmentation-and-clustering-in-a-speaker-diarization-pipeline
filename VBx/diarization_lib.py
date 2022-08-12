@@ -7,7 +7,7 @@ import numpy as np
 import scipy.linalg as spl
 import errno, os
 from scipy.special import softmax
-from sklearn.cluster import DBSCAN
+from sklearn.cluster import DBSCAN, MeanShift, OPTICS
 
 
 def twoGMMcalib_lin(s, niters=20):
@@ -244,7 +244,14 @@ def cos_similarity(x):
 
 def DBSCAN_diar(x: np.ndarray):
     db = DBSCAN(eps=0.5, min_samples=5).fit(x)
-    core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
-    core_samples_mask[db.core_sample_indices_] = True
-    labels = db.labels_
-    return labels
+    return db.labels_
+
+
+def MeanShift_diar(x: np.ndarray):
+    db = MeanShift(bandwidth=5).fit(x)
+    return db.labels_
+
+
+def OPTICS_diar(x: np.ndarray):
+    db = OPTICS(min_samples=15).fit(x)
+    return db.labels_
