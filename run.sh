@@ -9,13 +9,6 @@ audio=$1
 filename=$(echo "${audio}" | cut -f 1 -d '.')
 echo ${filename} > exp/list.txt
 
-python VAD/energy_VAD.py \
-  --in-audio-dir example/audios/16k \
-  --vad-out-dir example/vad/ \
-  --list exp/list.txt \
-  --threshold 0.75 \
-  --median-window-length 85
-
 # run feature and x-vectors extraction
 python VBx/predict.py \
     --in-file-list exp/list.txt \
